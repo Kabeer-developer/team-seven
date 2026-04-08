@@ -1,5 +1,6 @@
 import Submission from "../models/Submission.js";
 import User from "../models/User.js";
+import mongoose from "mongoose";
 
 // Global leaderboard (all users)
 export const calculateGlobalLeaderboard = async () => {
@@ -32,10 +33,12 @@ export const calculateGlobalLeaderboard = async () => {
 
 // Challenge-specific leaderboard
 export const calculateChallengeLeaderboard = async (challengeId) => {
+  const challengeObjectId = new mongoose.Types.ObjectId(challengeId);
+
   const leaderboard = await Submission.aggregate([
     {
       $match: {
-        challenge: challengeId,
+        challenge: challengeObjectId,
       },
     },
     {

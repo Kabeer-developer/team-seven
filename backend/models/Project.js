@@ -9,6 +9,8 @@ const projectSchema = mongoose.Schema(
     liveLink: String,
     members: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     image: String,
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    isFeatured: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

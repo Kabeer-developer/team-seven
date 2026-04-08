@@ -16,6 +16,7 @@ const userSchema = mongoose.Schema(
     github: String,
     linkedin: String,
     score: { type: Number, default: 0 },
+    isActive: { type: Boolean, default: true },
 
     roleInClub: String, // Lead/Core/Member
     batch: String,

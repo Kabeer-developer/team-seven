@@ -4,6 +4,7 @@ const announcementSchema = mongoose.Schema(
   {
     title: String,
     message: String,
+    content: String,
   },
   { timestamps: true }
 );
