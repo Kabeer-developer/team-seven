@@ -15,7 +15,8 @@ const MainLayout = () => {
         <Link to="/leaderboard">Leaderboard</Link>
         <Link to="/projects">Projects</Link>
         <Link to="/gallery">Gallery</Link>
-        <Link to="/team">Team</Link>
+
+        {/* ❌ REMOVED TEAM */}
 
         {user ? (
           <>

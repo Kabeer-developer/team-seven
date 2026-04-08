@@ -13,7 +13,6 @@ import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
 
-import Team from "../pages/Team";
 import Events from "../pages/Events";
 import EventDetail from "../pages/EventDetail";
 
@@ -32,13 +31,13 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        {/* Public Routes */}
+
+        {/* PUBLIC */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          <Route path="/team" element={<Team />} />
           <Route path="/events" element={<Events />} />
           <Route path="/events/:id" element={<EventDetail />} />
 
@@ -52,7 +51,7 @@ const AppRoutes = () => {
           <Route path="/gallery" element={<Gallery />} />
         </Route>
 
-        {/* Protected Routes */}
+        {/* PROTECTED */}
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
@@ -60,12 +59,13 @@ const AppRoutes = () => {
           </Route>
         </Route>
 
-        {/* Admin Routes */}
+        {/* ADMIN */}
         <Route element={<AdminRoute />}>
           <Route element={<AdminLayout />}>
             <Route path="/admin" element={<Admin />} />
           </Route>
         </Route>
+
       </Routes>
     </Router>
   );

@@ -10,10 +10,15 @@ const Team = () => {
 
   return (
     <div>
-      <h2>Team</h2>
+      <h2>Team Members</h2>
+
+      {users.length === 0 && <p>No members found</p>}
+
       {users.map((u) => (
         <div key={u._id}>
-          {u.name} - {u.roleInClub}
+          <p><strong>{u.name}</strong></p>
+          <p>Role: {u.role}</p>
+          <p>Email: {u.email}</p>
         </div>
       ))}
     </div>
