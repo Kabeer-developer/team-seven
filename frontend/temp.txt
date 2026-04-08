@@ -1,0 +1,250 @@
+frontend/
+│
+├── public/
+│   ├── index.html
+│
+├── src/
+
+
+src/
+│
+├── assets/
+│   ├── images/
+│   ├── icons/
+│
+├── components/
+│   ├── common/
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Loader.jsx
+│   │   ├── Modal.jsx
+│   │   ├── Button.jsx
+│   │
+│   ├── cards/
+│   │   ├── EventCard.jsx
+│   │   ├── ChallengeCard.jsx
+│   │   ├── ProjectCard.jsx
+│   │   ├── MemberCard.jsx
+│   │
+│   ├── ui/
+│   │   ├── Tabs.jsx
+│   │   ├── Badge.jsx
+│   │   ├── Input.jsx
+│
+├── pages/
+│   ├── Home.jsx
+│   ├── Login.jsx
+│   ├── Register.jsx
+│   ├── Dashboard.jsx
+│   ├── Profile.jsx
+│
+│   ├── Team.jsx
+│
+│   ├── Events.jsx
+│   ├── EventDetail.jsx
+│
+│   ├── Challenges.jsx
+│   ├── ChallengeDetail.jsx   🔥 (submission page)
+│
+│   ├── Leaderboard.jsx
+│
+│   ├── Projects.jsx
+│   ├── ProjectDetail.jsx
+│
+│   ├── Gallery.jsx
+│
+│   ├── Admin.jsx
+│
+├── layouts/
+│   ├── MainLayout.jsx
+│   ├── AdminLayout.jsx
+│
+├── routes/
+│   ├── AppRoutes.jsx
+│   ├── ProtectedRoute.jsx
+│   ├── AdminRoute.jsx
+│
+├── services/        🔥 (API connection layer)
+│   ├── api.js
+│   ├── authService.js
+│   ├── userService.js
+│   ├── eventService.js
+│   ├── challengeService.js
+│   ├── submissionService.js
+│   ├── leaderboardService.js
+│   ├── projectService.js
+│   ├── galleryService.js
+│   ├── announcementService.js
+│   ├── statsService.js
+│
+├── context/
+│   ├── AuthContext.jsx
+│   ├── GlobalContext.jsx
+│
+├── hooks/
+│   ├── useAuth.js
+│   ├── useFetch.js
+│
+├── utils/
+│   ├── helpers.js
+│   ├── constants.js
+│
+├── App.jsx
+├── main.jsx
+
+
+
+
+end points 
+Perfect 🔥 — here is your **FINAL VERIFIED BACKEND ENDPOINT LIST**
+(Everything you tested in Postman — clean, ready for frontend use)
+
+---
+
+# 🌐 BASE URL
+
+```id="baseurlfinal"
+http://localhost:5000/api
+```
+
+---
+
+# 🔐 AUTH
+
+```id="authendpoints"
+POST   /auth/register
+POST   /auth/login
+```
+
+---
+
+# 👤 USERS
+
+```id="userendpoints"
+GET    /users                 # get all users (team)
+GET    /users/profile        # get logged-in user
+PUT    /users/profile        # update profile
+```
+
+---
+
+# 📅 EVENTS
+
+```id="eventendpoints"
+GET    /events
+POST   /events               # admin only
+POST   /events/:id/register
+```
+
+---
+
+# 🧠 CHALLENGES
+
+```id="challengeendpoints"
+GET    /challenges
+GET    /challenges/:id
+POST   /challenges           # admin only
+```
+
+---
+
+# 🧾 SUBMISSIONS
+
+```id="submissionendpoints"
+POST   /submissions
+GET    /submissions/me
+PUT    /submissions/:id/grade   # admin only
+```
+
+---
+
+# 🏆 LEADERBOARD
+
+```id="leaderendpoints"
+GET    /leaderboard
+GET    /leaderboard?challengeId=ID
+```
+
+---
+
+# 🚀 PROJECTS
+
+```id="projectendpoints"
+GET    /projects
+POST   /projects             # admin only
+```
+
+---
+
+# 🖼️ GALLERY
+
+```id="galleryendpoints"
+GET    /gallery
+POST   /gallery              # admin only
+```
+
+---
+
+# 📢 ANNOUNCEMENTS
+
+```id="announceendpoints"
+GET    /announcements
+POST   /announcements        # admin only
+```
+
+---
+
+# 📊 STATS
+
+```id="statsendpoints"
+GET    /stats
+```
+
+---
+
+# 🔒 AUTH HEADER (IMPORTANT)
+
+For protected routes:
+
+```id="authheaderfinal"
+Authorization: Bearer YOUR_TOKEN
+```
+
+---
+
+# 🧠 COMPLETE FLOW (IMPORTANT FOR FRONTEND)
+
+👉 You now support:
+
+1. Auth → login/register
+2. Events → view + register
+3. Challenges → view
+4. Submission → submit solution
+5. Admin → grade submission
+6. Leaderboard → view ranking
+7. Projects → showcase
+8. Gallery → view images
+9. Announcements → display
+10. Stats → homepage data
+
+---
+
+# 🏁 FINAL STATUS
+
+👉 Backend is:
+
+* ✅ Fully tested
+* ✅ Fully working
+* ✅ Feature complete
+* ✅ Ready for frontend integration
+
+---
+
+# 🚀 NEXT STEP
+
+Say:
+👉 **"frontend services code"** → I’ll connect all these APIs
+👉 OR
+👉 **"AuthContext"** → full login system
+
+Let’s finish frontend and win this 🔥

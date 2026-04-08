@@ -1,0 +1,16 @@
+import api from "./api";
+
+export const submitSolution = async (data) => {
+  const res = await api.post("/submissions", data);
+  return res.data;
+};
+
+export const getMySubmissions = async () => {
+  const res = await api.get("/submissions/me");
+  return res.data;
+};
+
+export const gradeSubmission = async (id, score) => {
+  const res = await api.put(`/submissions/${id}/grade`, { score });
+  return res.data;
+};
