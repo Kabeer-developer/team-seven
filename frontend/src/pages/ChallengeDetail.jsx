@@ -26,24 +26,38 @@ const ChallengeDetail = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-bold">{challenge?.title}</h2>
-      <p className="text-slate-700 dark:text-slate-300">{challenge?.description}</p>
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-2xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 sm:p-12">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            {challenge?.title}
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-700 mb-12 leading-relaxed">
+            {challenge?.description}
+          </p>
 
-      <input
-        placeholder="GitHub Link"
-        className="mr-2 rounded-md border border-slate-300 px-3 py-2 dark:border-slate-700 dark:bg-slate-900"
-        onChange={(e) => setForm({ ...form, githubLink: e.target.value })}
-      />
-      <input
-        placeholder="Live Link"
-        className="rounded-md border border-slate-300 px-3 py-2 dark:border-slate-700 dark:bg-slate-900"
-        onChange={(e) => setForm({ ...form, liveLink: e.target.value })}
-      />
+          <div className="space-y-4">
+            <input
+              placeholder="GitHub Link"
+              className="w-full rounded-xl border border-gray-200 px-5 py-4 text-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm"
+              onChange={(e) => setForm({ ...form, githubLink: e.target.value })}
+            />
+            <input
+              placeholder="Live Link"
+              className="w-full rounded-xl border border-gray-200 px-5 py-4 text-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm"
+              onChange={(e) => setForm({ ...form, liveLink: e.target.value })}
+            />
 
-      <button className="block rounded-md bg-indigo-600 px-3 py-2 text-white" disabled={submitting} onClick={handleSubmit}>
-        {submitting ? "Submitting..." : "Submit"}
-      </button>
+            <button 
+              className="w-full sm:w-auto block sm:inline-block bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={submitting} 
+              onClick={handleSubmit}
+            >
+              {submitting ? "Submitting..." : "Submit"}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
