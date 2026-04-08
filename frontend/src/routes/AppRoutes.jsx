@@ -12,6 +12,9 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
+import Team from "../pages/Team";
+import Announcements from "../pages/Announcements";
+import Stats from "../pages/Stats";
 
 import Events from "../pages/Events";
 import EventDetail from "../pages/EventDetail";
@@ -49,6 +52,8 @@ const AppRoutes = () => {
           <Route path="/projects/:id" element={<ProjectDetail />} />
 
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/announcements" element={<Announcements />} />
+          <Route path="/stats" element={<Stats />} />
         </Route>
 
         {/* PROTECTED */}
@@ -63,6 +68,7 @@ const AppRoutes = () => {
         <Route element={<AdminRoute />}>
           <Route element={<AdminLayout />}>
             <Route path="/admin" element={<Admin />} />
+            <Route path="/team" element={<Team />} />
           </Route>
         </Route>
 

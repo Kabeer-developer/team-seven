@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getEvents } from "../services/eventService";
+import { getEventById } from "../services/eventService";
 
 const EventDetail = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
 
   useEffect(() => {
-    getEvents().then((data) => {
-      const found = data.find((e) => e._id === id);
-      setEvent(found);
-    });
+    getEventById(id).then(setEvent);
   }, [id]);
 
   return (
