@@ -1,0 +1,73 @@
+backend/
+│
+├── config/
+│   ├── db.js
+│   ├── cloudinary.js
+│
+├── models/
+│   ├── User.js
+│   ├── Event.js
+│   ├── Challenge.js
+│   ├── Submission.js
+│   ├── Project.js
+│   ├── Gallery.js
+│   ├── Announcement.js
+│
+├── controllers/
+│   ├── authController.js
+│   ├── userController.js
+│   ├── eventController.js
+│   ├── challengeController.js
+│   ├── submissionController.js
+│   ├── leaderboardController.js
+│   ├── projectController.js
+│   ├── galleryController.js
+│   ├── announcementController.js
+│   ├── statsController.js
+│
+├── routes/
+│   ├── authRoutes.js
+│   ├── userRoutes.js
+│   ├── eventRoutes.js
+│   ├── challengeRoutes.js
+│   ├── submissionRoutes.js
+│   ├── leaderboardRoutes.js
+│   ├── projectRoutes.js
+│   ├── galleryRoutes.js
+│   ├── announcementRoutes.js
+│   ├── statsRoutes.js
+│
+├── middleware/
+│   ├── authMiddleware.js
+│   ├── roleMiddleware.js
+│   ├── errorMiddleware.js
+│
+├── utils/
+│   ├── generateToken.js
+│
+├── services/
+│   ├── leaderboardService.js
+│   ├── emailService.js   # optional
+│
+├── uploads/
+│
+├── server.js
+├── .env
+├── package.json
+
+
+{"_id":"69d5e948e72e7fc9e61fc3e5","name":"Kabeer","email":"kabeer@gmail.com","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDVlOTQ4ZTcyZTdmYzllNjFmYzNlNSIsImlhdCI6MTc3NTYyNjU2OCwiZXhwIjoxNzc2MjMxMzY4fQ.iIHJgLyLy9WfKhi824vkuYiKEtfjBoI6xOfCpvlItUk"}
+
+{
+    "_id": "69d5e948e72e7fc9e61fc3e5",
+    "name": "Kabeer",
+    "email": "kabeer@gmail.com",
+    "role": "member",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDVlOTQ4ZTcyZTdmYzllNjFmYzNlNSIsImlhdCI6MTc3NTYyNjY3MywiZXhwIjoxNzc2MjMxNDczfQ.DRak2Q9YyyE5ue1MVz8ltaTRwVOWcgv0M44JIlnSbzI"
+}
+
+
+event 
+{"title":"Hackathon","description":"Build something cool","date":"2026-04-10T00:00:00.000Z","category":"Hackathon","participants":[],"_id":"69d5ec0f75699c07c9d4dafb","createdAt":"2026-04-08T05:47:59.777Z","updatedAt":"2026-04-08T05:47:59.777Z","__v":0}
+
+{"title":"Club Website","description":"Full stack app","techStack":["React","Node"],"github":"https://github.com/project","liveLink":"https://project.com","members":[],"_id":"69d5ee2175699c07c9d4db18","createdAt":"2026-04-08T05:56:49.576Z","updatedAt":"2026-04-08T05:56:49.576Z","__v":0}
