@@ -5,7 +5,12 @@ export const getGallery = async () => {
   return res.data.items || [];
 };
 
-export const addImage = async (data) => {
-  const res = await api.post("/gallery", data);
+// 🔥 supports BOTH file + URL
+export const addImage = async (data, isFile = false) => {
+  const res = await api.post("/gallery", data, {
+    headers: isFile
+      ? { "Content-Type": "multipart/form-data" }
+      : {},
+  });
   return res.data;
 };

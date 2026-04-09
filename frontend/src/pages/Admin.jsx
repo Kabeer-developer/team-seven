@@ -9,7 +9,7 @@ import { getUsers, updateUserAdmin } from "../services/userService";
 import {
   getSubmissions, gradeSubmission,
 } from "../services/submissionService";
-import { addImage } from "../services/galleryService";
+import { addImage, getGallery } from "../services/galleryService";
 import {
   createAnnouncement, deleteAnnouncement, getAnnouncements, updateAnnouncement,
 } from "../services/announcementService";
@@ -22,7 +22,10 @@ const Admin = () => {
   const [challenge, setChallenge] = useState({ title: "", description: "" });
   const [users, setUsers] = useState([]);
   const [submissions, setSubmissions] = useState([]);
+  const [images, setImages] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
+  const [file, setFile] = useState(null);
+  const [caption, setCaption] = useState("");
   const [events, setEvents] = useState([]);
   const [challenges, setChallenges] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -75,11 +78,41 @@ const Admin = () => {
   };
 
   const handleUpload = async () => {
-    if (!imageUrl) return alert("Enter image URL");
-    await addImage({ image: imageUrl, album: "Admin Uploads" });
-    alert("Image Added ✅");
-    setImageUrl("");
+    try {
+      if (!file && !imageUrl) {
+        alert("Select file or enter URL");
+        return;
+      }
+
+      if (file) {
+        const formData = new FormData();
+        formData.append("image", file);
+        formData.append("caption", caption);
+
+        await addImage(formData, true);
+      } else {
+        await addImage({
+          image: imageUrl,
+          caption,
+        });
+      }
+
+      // ✅ reload gallery (optional but correct)
+      const updated = await getGallery();
+      setImages(updated);
+
+      // reset
+      setImageUrl("");
+      setFile(null);
+      setCaption("");
+
+      alert("Uploaded ✅");
+    } catch (err) {
+      console.error(err);
+      alert("Upload failed ❌");
+    }
   };
+
 
   const handlePromote = async (id, role) => {
     await updateUserAdmin(id, { role });
@@ -168,7 +201,7 @@ const Admin = () => {
                 value={event.description}
                 onChange={(e) => setEvent({ ...event, description: e.target.value })}
               />
-              <button 
+              <button
                 className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-4 px-8 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
                 onClick={handleEvent}
               >
@@ -196,7 +229,7 @@ const Admin = () => {
                 value={challenge.description}
                 onChange={(e) => setChallenge({ ...challenge, description: e.target.value })}
               />
-              <button 
+              <button
                 className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
                 onClick={handleChallenge}
               >
@@ -219,12 +252,12 @@ const Admin = () => {
                 onChange={(e) => setProject({ ...project, title: e.target.value })}
               />
               <input
-                                className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-purple-200 focus:border-purple-400 text-lg"
+                className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-purple-200 focus:border-purple-400 text-lg"
                 placeholder="Description"
                 value={project.description}
                 onChange={(e) => setProject({ ...project, description: e.target.value })}
               />
-              <button 
+              <button
                 className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-bold py-4 px-8 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
                 onClick={handleProject}
               >
@@ -236,23 +269,40 @@ const Admin = () => {
 
         {/* Gallery Upload */}
         <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100 max-w-2xl mx-auto">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center text-white font-bold text-lg">🖼️</div>
-            Gallery Upload
-          </h3>
-          <div className="flex gap-4">
+          <h3 className="text-2xl font-bold mb-6">🖼️ Gallery Upload</h3>
+
+          <div className="flex flex-col gap-4">
+
+            {/* URL */}
             <input
-              className="flex-1 px-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-pink-200 focus:border-pink-400 text-lg"
-              placeholder="Image URL"
+              placeholder="Image URL (optional)"
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
+              className="px-4 py-3 border rounded-xl"
             />
-            <button 
-              className="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white font-bold py-4 px-12 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 whitespace-nowrap"
+
+            {/* File */}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+
+            {/* Caption */}
+            <input
+              placeholder="Caption"
+              value={caption}
+              onChange={(e) => setCaption(e.target.value)}
+              className="px-4 py-3 border rounded-xl"
+            />
+
+            <button
               onClick={handleUpload}
+              className="bg-pink-600 text-white py-3 rounded-xl"
             >
-              📸 Add Image
+              Upload
             </button>
+
           </div>
         </div>
 
@@ -276,7 +326,7 @@ const Admin = () => {
               onChange={(e) => setAnnouncement({ ...announcement, content: e.target.value })}
             />
           </div>
-          <button 
+          <button
             className="w-full mt-6 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold py-4 px-8 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
             onClick={handleAnnouncementCreate}
           >
@@ -304,7 +354,7 @@ const Admin = () => {
                 </div>
                 <div className="space-y-2 mb-4">
                   <p><span className="font-semibold">Score:</span> {u.score || 0}</p>
-                  <p><span className="font-semibold">Status:</span> 
+                  <p><span className="font-semibold">Status:</span>
                     <span className={`ml-2 px-3 py-1 rounded-full text-xs font-bold ${u.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                       {u.isActive ? 'Active' : 'Banned'}
                     </span>
@@ -338,7 +388,7 @@ const Admin = () => {
                 <h4 className="font-bold text-lg text-gray-900 mb-2">{s.user?.name}</h4>
                 <p className="text-gray-600 mb-2">{s.challenge?.title}</p>
                 <p className="text-2xl font-bold text-emerald-600 mb-4">Score: {s.score || 0}</p>
-                <button 
+                <button
                   className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                   onClick={() => handleScore(s._id)}
                 >
@@ -359,13 +409,13 @@ const Admin = () => {
                 <div key={item._id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
                   <span className="font-medium text-gray-900">{item.title}</span>
                   <div className="flex gap-2">
-                    <button 
+                    <button
                       className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-all duration-200"
                       onClick={() => handleEventEdit(item)}
                     >
                       Edit
                     </button>
-                    <button 
+                    <button
                       className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded-xl transition-all duration-200"
                       onClick={() => deleteEvent(item._id).then(loadData)}
                     >
@@ -385,13 +435,13 @@ const Admin = () => {
                 <div key={item._id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
                   <span className="font-medium text-gray-900">{item.title}</span>
                   <div className="flex gap-2">
-                    <button 
+                    <button
                       className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-all duration-200"
                       onClick={() => handleChallengeEdit(item)}
                     >
                       Edit
                     </button>
-                    <button 
+                    <button
                       className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded-xl transition-all duration-200"
                       onClick={() => deleteChallenge(item._id).then(loadData)}
                     >
@@ -418,19 +468,19 @@ const Admin = () => {
                     </span>
                   </div>
                   <div className="flex gap-2">
-                    <button 
+                    <button
                       className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-all duration-200"
                       onClick={() => handleProjectEdit(item)}
                     >
                       Edit
                     </button>
-                    <button 
+                    <button
                       className="px-3 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-bold rounded-xl transition-all duration-200"
                       onClick={() => setProjectFeatured(item._id, !item.isFeatured).then(loadData)}
                     >
                       {item.isFeatured ? 'Unfeature' : 'Feature'}
                     </button>
-                    <button 
+                    <button
                       className="px-3 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded-xl transition-all duration-200"
                       onClick={() => deleteProject(item._id).then(loadData)}
                     >
@@ -450,13 +500,13 @@ const Admin = () => {
                 <div key={item._id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
                   <span className="font-medium text-gray-900">{item.title}</span>
                   <div className="flex gap-2">
-                    <button 
+                    <button
                       className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-all duration-200"
                       onClick={() => handleAnnouncementEdit(item)}
                     >
                       Edit
                     </button>
-                    <button 
+                    <button
                       className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded-xl transition-all duration-200"
                       onClick={() => deleteAnnouncement(item._id).then(loadData)}
                     >
