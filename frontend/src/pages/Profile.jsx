@@ -85,7 +85,7 @@ const Profile = () => {
                     className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-lg text-white placeholder-white/60 focus:ring-4 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all duration-300"
                     placeholder="https://..."
                     value={user.avatar||""} 
-                    onChange={v=>setUser({...user,avatar:v})}
+                    onChange={(e)=>setUser({...user,avatar:e.target.value})}
                   />
                 </div>
 
@@ -97,7 +97,7 @@ const Profile = () => {
                     className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-lg text-white placeholder-white/60 focus:ring-4 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all duration-300"
                     placeholder="Full name"
                     value={user.name||""} 
-                    onChange={v=>setUser({...user,name:v})}
+                    onChange={(e)=>setUser({...user,name:e.target.value})}
                   />
                 </div>
 
@@ -109,7 +109,7 @@ const Profile = () => {
                     className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-lg text-white placeholder-white/60 focus:ring-4 focus:ring-indigo-500/30 focus:border-indigo-400 resize-vertical min-h-[100px] transition-all duration-300"
                     placeholder="Tell us about yourself..."
                     value={user.bio||""} 
-                    onChange={v=>setUser({...user,bio:v})}
+                    onChange={(e)=>setUser({...user,bio:e.target.value})}
                   />
                 </div>
 
@@ -121,7 +121,7 @@ const Profile = () => {
                     className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-lg text-white placeholder-white/60 focus:ring-4 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all duration-300"
                     placeholder="React, Node.js, Python..."
                     value={skillsInput} 
-                    onChange={setSkillsInput}
+                    onChange={(e)=>setSkillsInput(e.target.value)}
                   />
                 </div>
 
@@ -134,7 +134,7 @@ const Profile = () => {
                       className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-lg text-white placeholder-white/60 focus:ring-4 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all duration-300"
                       placeholder="github.com/username"
                       value={user.github||""} 
-                      onChange={v=>setUser({...user,github:v})}
+                      onChange={(e)=>setUser({...user,github:e.target.value})}
                     />
                   </div>
                   <div>
@@ -145,7 +145,7 @@ const Profile = () => {
                       className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-lg text-white placeholder-white/60 focus:ring-4 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all duration-300"
                       placeholder="linkedin.com/in/username"
                       value={user.linkedin||""} 
-                      onChange={v=>setUser({...user,linkedin:v})}
+                      onChange={(e)=>setUser({...user,linkedin:e.target.value})}
                     />
                   </div>
                 </div>
