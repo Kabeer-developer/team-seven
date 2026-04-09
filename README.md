@@ -71,12 +71,8 @@ It enables:
 * Showcase club activities
 * Admin-managed uploads
 
----
 
-### 🌙 Dark Mode
 
-* Toggle between light & dark themes
-* Persistent user preference
 
 ---
 
@@ -159,7 +155,7 @@ CLOUDINARY_API_SECRET=xxx
 ## 🚀 Deployment
 
 * Frontend: Vercel
-* Backend: Render / Railway
+* Backend: Render
 
 ---
 
@@ -168,7 +164,7 @@ CLOUDINARY_API_SECRET=xxx
 * Full-stack MERN application
 * Role-based admin system
 * Real-time leaderboard
-* Clean UI with dark mode
+
 * Production-ready structure
 
 ---
