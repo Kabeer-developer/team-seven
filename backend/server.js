@@ -36,6 +36,7 @@ app.get("/", (req, res) => {
 });
 
 // API routes
+app.use("/uploads", express.static("uploads"));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/events", eventRoutes);
@@ -46,6 +47,7 @@ app.use("/api/projects", projectRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/announcements", announcementRoutes);
 app.use("/api/stats", statsRoutes);
+
 
 // Error handling (MUST be last)
 app.use(notFound);

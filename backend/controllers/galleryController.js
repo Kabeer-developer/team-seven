@@ -23,15 +23,31 @@ export const getGallery = async (req, res) => {
 };
 
 // Add image
-export const addImage = async (req, res) => {
-  // Support both `image` and legacy `imageUrl` payload keys from frontend.
-  const payload = {
-    image: req.body.image || req.body.imageUrl,
-    event: req.body.event || null,
-    album: req.body.album || "General",
-    caption: req.body.caption || "",
-  };
 
-  const image = await Gallery.create(payload);
-  res.json(image);
+export const addImage = async (req, res) => {
+  try {
+    let imagePath = "";
+
+    // ✅ If file uploaded (local image)
+    if (req.file) {
+      imagePath = `/uploads/${req.file.filename}`;
+    } 
+    // ✅ If URL provided
+    else {
+      imagePath = req.body.image || req.body.imageUrl;
+    }
+
+    const payload = {
+      image: imagePath,
+      event: req.body.event || null,
+      album: req.body.album || "General",
+      caption: req.body.caption || "",
+    };
+
+    const image = await Gallery.create(payload);
+    res.json(image);
+
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
