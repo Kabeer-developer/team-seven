@@ -1,7 +1,7 @@
 # 🚀 ClubHub – Smart Club Management Platform
 
 🌐 Live Demo: https://clubhub-frontend.vercel.app/
-
+Login as Admin : email kabeer@gmail.com pass 123456 to view admin page
 ---
 
 ## 📌 Overview
